@@ -1,15 +1,13 @@
-import { IonicModule } from '@ionic/angular';
-import { RouterModule } from '@angular/router';
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { IonicModule } from '@ionic/angular';
 
-import { TabsPageRoutingModule } from './tabs.router.module';
-
+import { GroupsPageModule } from '../groups/groups.module';
+import { InboxPageModule } from './../inbox/inbox.module';
+import { ProfilePageModule } from './../profile/profile.module';
 import { TabsPage } from './tabs.page';
-import { ContactPageModule } from '../contact/contact.module';
-import { AboutPageModule } from '../about/about.module';
-import { HomePageModule } from '../home/home.module';
+import { TabsPageRoutingModule } from './tabs.router.module';
 
 @NgModule({
   imports: [
@@ -17,9 +15,10 @@ import { HomePageModule } from '../home/home.module';
     CommonModule,
     FormsModule,
     TabsPageRoutingModule,
-    HomePageModule,
-    AboutPageModule,
-    ContactPageModule
+
+    InboxPageModule,
+    GroupsPageModule,
+    ProfilePageModule
   ],
   declarations: [TabsPage]
 })
