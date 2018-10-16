@@ -1,12 +1,3 @@
-<!-- <ion-header>
-  <ion-toolbar>
-    <ion-title>Login</ion-title>
-  </ion-toolbar>
-</ion-header> -->
-
-<!-- <ion-buttons slot="start">
-  <ion-back-button></ion-back-button>
-</ion-buttons> -->
 
 <ion-content padding>
   <div class="login-content">
@@ -24,10 +15,12 @@
         </ion-item>
       </div>
       <ion-row justify-content-end>
-        <ion-button color="medium">Register</ion-button>
-        <ion-button color="primary">Login</ion-button>
+        <div>
+          <ion-button color="medium" (click)="navigateToRegisterPage()">Register</ion-button>
+          <ion-button color="primary" (click)="navigateToInboxPage()">Login</ion-button>
+        </div>
       </ion-row>
-      
+
     </div>
   </div>
 </ion-content>

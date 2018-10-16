@@ -43,6 +43,10 @@ ion-item {
 ion-row {
     margin: 0 auto;
     display: block;
+
+    div ion-button:nth-of-type(1) {
+        margin-right: 10px;
+    }
 }
 
 
