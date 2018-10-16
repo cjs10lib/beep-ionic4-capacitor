@@ -8,17 +8,9 @@ import { Router } from '@angular/router';
 })
 export class LoginPage implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor() { }
 
   ngOnInit() {
-  }
-
-  navigateToInboxPage() {
-    this.router.navigate(['/']);
-  }
-
-  navigateToRegisterPage() {
-    this.router.navigate(['register']);
   }
 
 }
