@@ -8,15 +8,9 @@ import { Router } from '@angular/router';
 })
 export class RegisterPage implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor() { }
 
   ngOnInit() {
-  }
-
-  register() {}
-
-  navigateToLoginPage() {
-    this.router.navigate(['login']);
   }
 
 }
