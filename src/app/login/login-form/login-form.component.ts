@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { AuthService } from './../../services/auth.service';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
+import { Account } from '../../models/account/account.model';
+import { LoginResponse } from '../../models/login-response/login-response.model';
 
 @Component({
   selector: 'app-login-form',
@@ -8,13 +11,19 @@ import { Router } from '@angular/router';
 })
 export class LoginFormComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  @Output() loginStatus: EventEmitter<LoginResponse>;
 
-  ngOnInit() {
+  account = {} as Account;
+
+  constructor(private router: Router, private authService: AuthService) {
+    this.loginStatus = new EventEmitter<LoginResponse>();
   }
 
-  navigateToInboxPage() {
-    this.router.navigate(['/']);
+  ngOnInit() { }
+
+  async login() {
+    const result = await this.authService.signInWithEmailAndPassword(this.account);
+    this.loginStatus.emit(result);
   }
 
   navigateToRegisterPage() {

@@ -1,8 +1,10 @@
 
 export interface LoginResponse {
     result?: {
-        uid?: string;
-        email?: string;
+        user?: {
+            uid?: string;
+            email?: string;
+        }
     };
     error?: {
         code?: string;

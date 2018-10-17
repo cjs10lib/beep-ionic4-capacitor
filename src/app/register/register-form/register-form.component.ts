@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { LoginResponse } from './../../models/login-response/login-response.model';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { Account } from '../../models/account/account.model';
 import { AuthService } from '../../services/auth.service';
@@ -10,16 +11,20 @@ import { AuthService } from '../../services/auth.service';
 })
 export class RegisterFormComponent implements OnInit {
 
+  @Output() registerStatus: EventEmitter<LoginResponse>;
+
   account = {} as Account;
 
-  constructor(private router: Router, private authService: AuthService) { }
+  constructor(private router: Router, private authService: AuthService) {
+    this.registerStatus = new EventEmitter<LoginResponse>;
+  }
 
   ngOnInit() {
   }
 
   async register() {
     const result = await this.authService.createUserWithEmailAndPassword(this.account);
-    console.log(result);
+    this.registerStatus.emit(result);
   }
 
   navigateToLoginPage() {

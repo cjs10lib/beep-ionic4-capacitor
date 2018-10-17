@@ -13,7 +13,7 @@
     <div class="vertical-align">
       <img src="assets/logo/chat-logo.png" alt="logo" class="logo">
         
-      <app-register-form></app-register-form>
+      <app-register-form (registerStatus)="register($event)"></app-register-form>
     </div>
   </div>
 

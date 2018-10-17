@@ -4,7 +4,7 @@
     <div class="vertical-align">
       <img src="assets/logo/chat-logo.png" alt="logo" class="logo">
 
-      <app-login-form></app-login-form>
+      <app-login-form (loginStatus)="login($event)"></app-login-form>
     </div>
   </div>
 </ion-content>
