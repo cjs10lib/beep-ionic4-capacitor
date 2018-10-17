@@ -10,6 +10,10 @@ export class AuthService {
 
   constructor(private auth: AngularFireAuth) { }
 
+  getAuthState() {
+    return this.auth.authState;
+  }
+
   async signInWithEmailAndPassword(account: Account) {
     try {
       return <LoginResponse> {

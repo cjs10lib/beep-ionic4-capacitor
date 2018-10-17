@@ -1,35 +1,48 @@
 
-<div class="register-content">
-  <div class="vertical-align">
+<!-- <div class="register-content">
+  <div class="vertical-align"> -->
+    <form #f="ngForm">
 
-    <div class="profile-form">
-      <ion-item>
-        <ion-label position="floating" color="primary">First Name</ion-label>
-        <ion-input type="email" [(ngModel)]="profile.email" color="primary"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating" color="primary">Last Name</ion-label>
-        <ion-input type="password" [(ngModel)]="profile.lastName" color="primary"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating" color="primary">Date Of Birth</ion-label>
-        <ion-datetime display-format="DD MMM, YYYY" [(ngModel)]="profile.dateOfBirth"></ion-datetime>
-      </ion-item>
-    
-      <ion-item>
-        <ion-label position="floating" color="primary">Phone</ion-label>
-        <ion-input type="tel" [(ngModel)]="profile.phoneNumber" color="primary"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating" color="primary">Email</ion-label>
-        <ion-input type="password" [(ngModel)]="profile.email" color="primary"></ion-input>
-      </ion-item>
-    </div>
-    <ion-row justify-content-end>
-      <div>
-        <ion-button (click)="saveProfile()">Save</ion-button>
+      <div class="profile-form">
+        <ion-item>
+          <ion-label position="floating" color="primary">First Name</ion-label>
+          <ion-input type="text" [(ngModel)]="profile.firstName" name="firstName" #firstName="ngModel" color="primary" required></ion-input>
+        </ion-item>
+        <div *ngIf="firstName.touched && firstName.invalid">
+          <span class="global-error">First name is <strong>required</strong></span>
+        </div>
+
+        <ion-item>
+          <ion-label position="floating" color="primary">Last Name</ion-label>
+          <ion-input type="text" [(ngModel)]="profile.lastName" name="lastName" #lastName="ngModel" color="primary" required></ion-input>
+        </ion-item>
+        <div *ngIf="lastName.touched && lastName.invalid">
+          <span class="global-error">Last name is <strong>required</strong></span>
+        </div>
+
+        <ion-item>
+          <ion-label position="floating" color="primary">Date Of Birth</ion-label>
+          <ion-datetime display-format="DD MMMM, YYYY" [(ngModel)]="profile.dateOfBirth" name="dateOfBirth" #dateOfBirth="ngModel" required></ion-datetime>
+        </ion-item> 
+        <div *ngIf="dateOfBirth.touched && dateOfBirth.invalid">
+          <span class="global-error">Date of birth is <strong>required</strong></span>
+        </div>
+        
+        <ion-item>
+          <ion-label position="floating" color="primary">Phone</ion-label>
+          <ion-input type="tel" [(ngModel)]="profile.phoneNumber" name="phoneNumber" #phoneNumber="ngModel" color="primary"></ion-input>
+        </ion-item>
+        <div *ngIf="phoneNumber.touched && phoneNumber.invalid">
+          <span class="global-error">A valid phone number is <strong>required</strong></span>
+        </div>
       </div>
-    </ion-row>
+      <ion-row justify-content-end>
+        <div>
+          <ion-button (click)="saveProfile()" [disabled]="f.invalid">Save</ion-button>
+        </div>
+      </ion-row>
 
-  </div>
-</div>
+    </form>
+
+  <!-- </div>
+</div> -->

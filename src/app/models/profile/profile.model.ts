@@ -7,4 +7,5 @@ export interface Profile {
     phoneNumber?: string;
     email?: string;
     created?: any;
+    lastUpdate?: any;
 }

@@ -18,7 +18,7 @@ export class RegisterPage implements OnInit {
     if (!event.error) {
       (await this.toast.create({ message: `Welcome to beep ${event.result.user.email}`, duration: 3000 })).present();
 
-      this.router.navigate(['tabs']);
+      this.router.navigate(['edit-profile']);
     } else {
       (await this.toast.create({ message: event.error.message, duration: 3000 })).present();
     }

@@ -1,16 +1,28 @@
-<div class="login-form">
-  <ion-item>
-    <ion-label position="floating" color="light">Email Address</ion-label>
-    <ion-input type="email" [(ngModel)]="account.email" color="light"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating" color="light">Password</ion-label>
-    <ion-input type="password" [(ngModel)]="account.password" color="light"></ion-input>
-  </ion-item>
-</div>
-<ion-row justify-content-end>
-  <div>
-    <ion-button color="medium" (click)="navigateToRegisterPage()">Register</ion-button>
-    <ion-button color="primary" (click)="login()">Login</ion-button>
+
+<form #f="ngForm">
+
+  <div class="login-form">
+    <ion-item>
+      <ion-label position="floating" color="light">Email Address</ion-label>
+      <ion-input type="email" [(ngModel)]="account.email" name="email" #email="ngModel" color="light" required></ion-input>
+    </ion-item>
+    <div *ngIf="email.touched && email.invalid">
+      <span class="global-error">Email address is not <strong>valid</strong></span>
+    </div>
+
+    <ion-item>
+      <ion-label position="floating" color="light">Password</ion-label>
+      <ion-input type="password" [(ngModel)]="account.password" name="password" #password="ngModel" color="light" required></ion-input>
+    </ion-item>
+    <div *ngIf="password.touched && password.invalid">
+      <span class="global-error">Password is <strong>required</strong></span>
+    </div>
   </div>
-</ion-row>
+  <ion-row justify-content-end>
+    <div>
+      <ion-button color="medium" (click)="navigateToRegisterPage()">Register</ion-button>
+      <ion-button color="primary" (click)="login()" [disabled]="f.invalid">Login</ion-button>
+    </div>
+  </ion-row>
+
+</form>
