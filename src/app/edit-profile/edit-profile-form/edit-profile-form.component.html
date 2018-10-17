@@ -1,0 +1,35 @@
+
+<div class="register-content">
+  <div class="vertical-align">
+
+    <div class="profile-form">
+      <ion-item>
+        <ion-label position="floating" color="primary">First Name</ion-label>
+        <ion-input type="email" [(ngModel)]="profile.email" color="primary"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating" color="primary">Last Name</ion-label>
+        <ion-input type="password" [(ngModel)]="profile.lastName" color="primary"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating" color="primary">Date Of Birth</ion-label>
+        <ion-datetime display-format="DD MMM, YYYY" [(ngModel)]="profile.dateOfBirth"></ion-datetime>
+      </ion-item>
+    
+      <ion-item>
+        <ion-label position="floating" color="primary">Phone</ion-label>
+        <ion-input type="tel" [(ngModel)]="profile.phoneNumber" color="primary"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating" color="primary">Email</ion-label>
+        <ion-input type="password" [(ngModel)]="profile.email" color="primary"></ion-input>
+      </ion-item>
+    </div>
+    <ion-row justify-content-end>
+      <div>
+        <ion-button (click)="saveProfile()">Save</ion-button>
+      </div>
+    </ion-row>
+
+  </div>
+</div>

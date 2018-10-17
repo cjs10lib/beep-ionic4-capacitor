@@ -16,7 +16,7 @@ export class RegisterFormComponent implements OnInit {
   account = {} as Account;
 
   constructor(private router: Router, private authService: AuthService) {
-    this.registerStatus = new EventEmitter<LoginResponse>;
+    this.registerStatus = new EventEmitter<LoginResponse>();
   }
 
   ngOnInit() {

@@ -15,7 +15,6 @@ export class RegisterPage implements OnInit {
   ngOnInit() { }
 
   async register(event: LoginResponse) {
-    console.log(event);
     if (!event.error) {
       (await this.toast.create({ message: `Welcome to beep ${event.result.user.email}`, duration: 3000 })).present();
 
