@@ -1,9 +1,12 @@
 <ion-header>
   <ion-toolbar color="primary"> 
-    <ion-title>Profile</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="navigateToEditProfilePage()">EDIT</ion-button>
+    </ion-buttons>
+    <ion-title>Profile</ion-title>   
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-
+<ion-content>
+  <app-profile-view></app-profile-view>
 </ion-content>
