@@ -1,10 +1,13 @@
+import { LoadingController } from '@ionic/angular';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { User } from 'firebase';
+import { Subscription } from 'rxjs';
 
-import { AuthService } from './../../services/auth.service';
-import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { Profile } from '../../models/profile/profile.model';
 import { ProfileService } from '../../services/profile.service';
-import { Subscription } from 'rxjs';
-import { User } from 'firebase';
+import { AuthService } from './../../services/auth.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-edit-profile-form',
@@ -20,13 +23,22 @@ export class EditProfileFormComponent implements OnInit, OnDestroy {
 
   subscription: Subscription;
 
-  constructor(private profileService: ProfileService, private authService: AuthService) {
+  constructor(private profileService: ProfileService,
+              private authService: AuthService,
+              private loading: LoadingController,
+              private router: Router) {
     this.saveProfileResult = new EventEmitter<boolean>();
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    const loader = await this.loading.create({ message: 'Loading profile...' });
+    loader.present();
+
     this.subscription = this.authService.getAuthState().subscribe(user => {
       this.authenticatedUser = user;
+
+      this.profileService.getProfile(user).subscribe(profile => this.profile = profile);
+      loader.dismiss();
     });
   }
 
@@ -40,6 +52,8 @@ export class EditProfileFormComponent implements OnInit, OnDestroy {
     if (this.authenticatedUser) {
       const result = await this.profileService.saveProfile(this.authenticatedUser, this.profile);
       this.saveProfileResult.emit(result);
+
+      this.router.navigateByUrl('/tabs/(profile:profile)');
     }
   }
 

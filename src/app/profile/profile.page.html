@@ -1,12 +1,12 @@
 <ion-header>
   <ion-toolbar color="primary"> 
     <ion-buttons slot="primary">
-      <ion-button (click)="navigateToEditProfilePage()">EDIT</ion-button>
+      <ion-button (click)="navigateToEditProfilePage()" routerDirection="forward">EDIT</ion-button>
     </ion-buttons>
     <ion-title>Profile</ion-title>   
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <app-profile-view></app-profile-view>
+  <app-profile-view (user)="getUser($event)"></app-profile-view>
 </ion-content>

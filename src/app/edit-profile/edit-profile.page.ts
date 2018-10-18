@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 })
 export class EditProfilePage implements OnInit {
 
+  profileId: string;
+
   constructor(private router: Router) { }
 
   ngOnInit() { }

@@ -1,6 +1,7 @@
-import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { Route } from '@angular/compiler/src/core';
+import { Router } from '@angular/router';
+import { User } from 'firebase';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-profile',
@@ -9,13 +10,18 @@ import { Route } from '@angular/compiler/src/core';
 })
 export class ProfilePage implements OnInit {
 
-  constructor(private router: Router) { }
+  user: User;
 
-  ngOnInit() {
-  }
+  constructor(private nav: NavController) { }
+
+  ngOnInit() { }
 
   navigateToEditProfilePage() {
-    this.router.navigate(['edit-profile']);
+    this.nav.navigateRoot(['edit-profile']);
+  }
+
+  getUser(event: User) {
+    this.user = event;
   }
 
 }
