@@ -1,0 +1,16 @@
+
+<ion-searchbar (ionChange)="searchUser()" [(ngModel)]="query" animated showCancelButton placeholder="Search Users"></ion-searchbar>
+
+<ion-list *ngIf="users?.length > 0">
+  <ion-list lines="none">
+    <ion-item *ngFor="let user of filteredUsers">
+      <ion-avatar slot="start">
+        <img src="assets/avatar/avatar.png" alt="Avatar">
+      </ion-avatar>
+      <ion-label>
+        <h2>{{ user.firstName }} {{ user?.lastName }}</h2>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-list>
+

@@ -1,5 +1,6 @@
 
 export interface Profile {
+    uid?: string;
     firstName?: string;
     lastName?: string;
     dateOfBirth?: Date;
