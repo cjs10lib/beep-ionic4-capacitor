@@ -1,10 +1,12 @@
+import { Router } from '@angular/router';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, NavController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 
 import { Profile } from '../../models/profile/profile.model';
 import { ProfileService } from '../../services/profile.service';
 import { AuthService } from './../../services/auth.service';
+import { Route } from '@angular/compiler/src/core';
 
 @Component({
   selector: 'app-profile-view',
@@ -19,27 +21,35 @@ export class ProfileViewComponent implements OnInit, OnDestroy {
 
   constructor(private authService: AuthService,
               private profileService: ProfileService,
-              private loading: LoadingController) { }
+              private loading: LoadingController,
+              private router: Router) { }
 
   async ngOnInit() {
     const loader = await this.loading.create({ message: 'Loading profile...' });
     loader.present();
 
     this.subscription = this.authService.getAuthState().subscribe(user => {
-      this.profileService.getProfile(user).subscribe(profile => {
-        this.profile = profile;
 
-        loader.dismiss();
-      });
+      if (user) {
+        this.profileService.getProfile(user).subscribe(profile => {
+          this.profile = profile;
+
+          loader.dismiss();
+        });
+      }
     });
 
-    console.log('loaded');
   }
 
   ngOnDestroy(): void {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
+  }
+
+  async signOut() {
+    await this.authService.signOut();
+    this.router.navigate(['login']);
   }
 
 }
