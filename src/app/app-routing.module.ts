@@ -7,7 +7,8 @@ const routes: Routes = [
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
   { path: 'register', loadChildren: './register/register.module#RegisterPageModule' },
   { path: 'edit-profile', loadChildren: './edit-profile/edit-profile.module#EditProfilePageModule', canActivate: [AuthGuard] },
-  { path: 'search-user', loadChildren: './search-user/search-user.module#SearchUserPageModule', canActivate: [AuthGuard] }
+  { path: 'search-user', loadChildren: './search-user/search-user.module#SearchUserPageModule', canActivate: [AuthGuard] },
+  { path: 'message/:id', loadChildren: './message/message.module#MessagePageModule', canActivate: [AuthGuard] }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

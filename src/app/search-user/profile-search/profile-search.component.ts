@@ -1,5 +1,5 @@
 import { Subscription } from 'rxjs';
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { ProfileService } from '../../services/profile.service';
 import { Profile } from '../../models/profile/profile.model';
 
@@ -11,13 +11,16 @@ import { Profile } from '../../models/profile/profile.model';
 export class ProfileSearchComponent implements OnInit, OnDestroy {
 
   @Input() query: string;
+  @Output() selectedUser: EventEmitter<Profile>;
 
   users: Profile[] = [];
   filteredUsers: Profile[] = [];
 
   subscription: Subscription;
 
-  constructor(private profileService: ProfileService) { }
+  constructor(private profileService: ProfileService) {
+    this.selectedUser = new EventEmitter<Profile>();
+  }
 
   ngOnInit() {
     this.subscription = this.profileService.getUsers().subscribe(users => {
@@ -29,6 +32,10 @@ export class ProfileSearchComponent implements OnInit, OnDestroy {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
+  }
+
+  selectProfile(user: Profile) {
+    this.selectedUser.emit(user);
   }
 
   searchUser() {

@@ -8,5 +8,5 @@
 </ion-header>
 
 <ion-content padding>
-  <app-profile-search></app-profile-search>
+  <app-profile-search (selectedUser)="openChat($event)"></app-profile-search>
 </ion-content>

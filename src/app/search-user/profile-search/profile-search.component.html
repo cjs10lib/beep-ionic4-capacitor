@@ -2,7 +2,7 @@
 <ion-searchbar (ionChange)="searchUser()" [(ngModel)]="query" animated showCancelButton placeholder="Search Users"></ion-searchbar>
 
 <ion-list *ngIf="users?.length > 0" lines="none">
-  <ion-item *ngFor="let user of filteredUsers" detail>
+  <ion-item *ngFor="let user of filteredUsers" (click)="selectProfile(user)" detail>
     <ion-avatar slot="start">
       <img src="assets/avatar/avatar.png" alt="Avatar">
     </ion-avatar>

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
+
+import { Profile } from './../models/profile/profile.model';
 
 @Component({
   selector: 'app-search-user',
@@ -7,9 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchUserPage implements OnInit {
 
-  constructor() { }
+  constructor(private nav: NavController) { }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  openChat(event: Profile) {
+    this.nav.navigateRoot('/message/' + event.uid );
   }
 
 }

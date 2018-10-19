@@ -34,6 +34,10 @@ export class ProfileService {
     return this.users$;
   }
 
+  getselectedUser(userId: string): Observable<Profile> {
+    return this.db.doc(`profiles/${userId}`).valueChanges().pipe(take(1));
+  }
+
   getProfile(user: User) {
     return this.db.doc(`profiles/${user.uid}`).valueChanges().pipe(take(1));
   }
