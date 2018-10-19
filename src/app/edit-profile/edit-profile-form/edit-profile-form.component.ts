@@ -25,8 +25,7 @@ export class EditProfileFormComponent implements OnInit, OnDestroy {
 
   constructor(private profileService: ProfileService,
               private authService: AuthService,
-              private loading: LoadingController,
-              private router: Router) {
+              private loading: LoadingController) {
     this.saveProfileResult = new EventEmitter<boolean>();
   }
 
@@ -52,8 +51,6 @@ export class EditProfileFormComponent implements OnInit, OnDestroy {
     if (this.authenticatedUser) {
       const result = await this.profileService.saveProfile(this.authenticatedUser, this.profile);
       this.saveProfileResult.emit(result);
-
-      this.router.navigateByUrl('/tabs/(profile:profile)');
     }
   }
 

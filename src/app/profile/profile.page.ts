@@ -10,18 +10,12 @@ import { NavController } from '@ionic/angular';
 })
 export class ProfilePage implements OnInit {
 
-  user: User;
-
   constructor(private nav: NavController) { }
 
   ngOnInit() { }
 
   navigateToEditProfilePage() {
     this.nav.navigateRoot(['edit-profile']);
-  }
-
-  getUser(event: User) {
-    this.user = event;
   }
 
 }

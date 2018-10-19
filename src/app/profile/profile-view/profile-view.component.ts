@@ -1,10 +1,10 @@
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { LoadingController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
-import { AuthService } from './../../services/auth.service';
-import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
+
 import { Profile } from '../../models/profile/profile.model';
 import { ProfileService } from '../../services/profile.service';
-import { LoadingController } from '@ionic/angular';
-import { User } from 'firebase';
+import { AuthService } from './../../services/auth.service';
 
 @Component({
   selector: 'app-profile-view',
@@ -13,17 +13,13 @@ import { User } from 'firebase';
 })
 export class ProfileViewComponent implements OnInit, OnDestroy {
 
-  @Output() user: EventEmitter<User>;
-
   profile = {} as Profile;
 
   subscription: Subscription;
 
   constructor(private authService: AuthService,
               private profileService: ProfileService,
-              private loading: LoadingController) {
-                this.user = new EventEmitter<User>();
-              }
+              private loading: LoadingController) { }
 
   async ngOnInit() {
     const loader = await this.loading.create({ message: 'Loading profile...' });
@@ -33,10 +29,7 @@ export class ProfileViewComponent implements OnInit, OnDestroy {
       this.profileService.getProfile(user).subscribe(profile => {
         this.profile = profile;
 
-        console.log(profile);
         loader.dismiss();
-
-        this.user.emit(user);
       });
     });
 
@@ -47,12 +40,6 @@ export class ProfileViewComponent implements OnInit, OnDestroy {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
-
-    console.log('destroyed');
-
-    // if (this.profileSubscription) {
-    //   this.profileSubscription.unsubscribe();
-    // }
   }
 
 }

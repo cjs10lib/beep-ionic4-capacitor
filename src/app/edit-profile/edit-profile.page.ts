@@ -15,7 +15,7 @@ export class EditProfilePage implements OnInit {
   ngOnInit() { }
 
   saveProfileResult(event: boolean) {
-    event ? this.router.navigate(['tabs']) : console.error('Not authenticated or saved');
+    event ? this.router.navigateByUrl('/tabs/(profile:profile)') : console.error('Not authenticated or saved');
   }
 
 }
