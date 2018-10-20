@@ -1,3 +1,4 @@
+import { Message } from './../models/messages/messages.model';
 import { AuthService } from './auth.service';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Injectable } from '@angular/core';
@@ -5,7 +6,7 @@ import { Group } from '../models/group/group.model';
 import * as firebase from 'firebase';
 import { User } from 'firebase';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +39,10 @@ export class ChatService {
     return this.groups;
   }
 
+  getGroup(groupId: string) {
+    return this.db.doc(`group-names/${groupId}`).valueChanges().pipe(take(1));
+  }
+
   async addGroup(groupName: string, user: User) {
     const group: Group = {
       name: groupName,
@@ -47,6 +52,18 @@ export class ChatService {
     };
 
     return await this.db.doc(`group-names/${group.name.toLowerCase()}`).set(group);
+  }
+
+  async sendGroupMessage(sentMessage: string, user: User, group: string) {
+    const message: Message = {
+      message: sentMessage,
+      user: user.uid,
+      group: group,
+      created: firebase.firestore.FieldValue.serverTimestamp(),
+      lastUpdate: firebase.firestore.FieldValue.serverTimestamp()
+    };
+
+    return await this.db.collection('group-chat').add(message);
   }
 }
 

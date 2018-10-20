@@ -1,7 +1,10 @@
 import { Profile } from './../profile/profile.model';
 
 export interface Message {
-    user?: Profile;
+    message?: string;
+    user?: string;
+    group?: string;
     lastMessage?: string;
-    created?: Date;
+    created?: any;
+    lastUpdate?: any;
 }

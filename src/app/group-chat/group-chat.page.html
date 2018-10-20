@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button (click)="navigateToGroupsPage()"></ion-back-button>
+      <!-- <ion-back-button defaultHref="/tabs/(groups:groups)" routerDirection="root"></ion-back-button> -->
+    </ion-buttons>
+    <ion-title>{{ group.name }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <app-chat-message [message]="message" [chatIndex]="index" *ngFor="let message of messages$ | async; let index = index"></app-chat-message>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <app-send-messsage-box (sendMessage)="sendMessage($event)"></app-send-messsage-box>
+  </ion-toolbar>
+</ion-footer>

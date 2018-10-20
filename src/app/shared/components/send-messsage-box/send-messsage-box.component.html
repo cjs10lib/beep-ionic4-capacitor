@@ -1,0 +1,12 @@
+<form #f="ngForm">
+  <ion-row>
+    <ion-col size="10" size-sm="10" size-lg="10">
+      <ion-input type="text" clearInput [(ngModel)]="message" name="message" placeholder="Type message..." required></ion-input>
+    </ion-col>
+    <ion-col size="2" size-sm="auto" size-lg="auto">
+      <ion-button size="small" (click)="send()" [disabled]="f.invalid">
+        <ion-icon slot="icon-only" name="send"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</form>

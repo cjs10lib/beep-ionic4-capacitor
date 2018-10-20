@@ -1,3 +1,4 @@
+import { SharedModule } from './../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -5,13 +6,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { MessagePage } from './message.page';
-import { SharedModule } from '../shared/shared.module';
+import { GroupChatPage } from './group-chat.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: MessagePage
+    component: GroupChatPage
   }
 ];
 
@@ -24,6 +24,6 @@ const routes: Routes = [
 
     SharedModule
   ],
-  declarations: [MessagePage]
+  declarations: [GroupChatPage]
 })
-export class MessagePageModule {}
+export class GroupChatPageModule {}

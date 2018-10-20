@@ -1,4 +1,4 @@
-import { Message } from './../../models/messages/messages.model';
+import { Message } from '../../../models/messages/messages.model';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
