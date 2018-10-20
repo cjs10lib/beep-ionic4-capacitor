@@ -54,7 +54,7 @@ export class ChatService {
     return await this.db.doc(`group-names/${group.name.toLowerCase()}`).set(group);
   }
 
-  async sendGroupMessage(sentMessage: string, user: User, group: string) {
+  async sendGroupChat(sentMessage: string, user: User, group: string) {
     const message: Message = {
       message: sentMessage,
       user: user.uid,
@@ -64,6 +64,10 @@ export class ChatService {
     };
 
     return await this.db.collection('group-chat').add(message);
+  }
+
+  getGroupChat(groupId: string) {
+    return this.db.collection('group-chat', ref => ref.where('group', '==', groupId).orderBy('created')).valueChanges();
   }
 }
 

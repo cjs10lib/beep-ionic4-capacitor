@@ -9,7 +9,7 @@
 </ion-header>
 
 <ion-content padding>
-  <app-chat-message [message]="message" [chatIndex]="index" *ngFor="let message of messages$ | async; let index = index"></app-chat-message>
+  <app-chat-message [message]="message" *ngFor="let message of messages$ | async"></app-chat-message>
 </ion-content>
 
 <ion-footer>

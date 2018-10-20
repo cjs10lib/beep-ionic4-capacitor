@@ -26,6 +26,7 @@ export class GroupChatPage implements OnInit {
 
   ngOnInit() {
     this.groupId = this.route.snapshot.paramMap.get('id');
+    this.messages$ = this.chatService.getGroupChat(this.groupId);
 
     this.chatService.getGroup(this.groupId).subscribe(group => {
       this.group = group;
@@ -45,7 +46,7 @@ export class GroupChatPage implements OnInit {
   }
 
   async sendMessage(event: string) {
-    await this.chatService.sendGroupMessage(event, this.user, this.groupId);
+    await this.chatService.sendGroupChat(event, this.user, this.groupId);
   }
 
   navigateToGroupsPage() {

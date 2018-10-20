@@ -9,7 +9,6 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ChatMessageComponent implements OnInit {
 
   @Input() message: Message;
-  @Input() chatIndex: number;
 
   constructor() { }
 
