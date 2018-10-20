@@ -1,10 +1,11 @@
+import { AuthService } from './auth.service';
 import { Profile } from './../models/profile/profile.model';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import * as firebase from 'firebase';
 import { User } from 'firebase';
 
-import { take, map } from 'rxjs/operators';
+import { take, map, mergeMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -15,7 +16,7 @@ export class ProfileService {
   usersCol: AngularFirestoreCollection<Profile>;
   users$: Observable<Profile[]>;
 
-  constructor(private db: AngularFirestore) {
+  constructor(private db: AngularFirestore, private authService: AuthService) {
     this.usersCol = this.db.collection('profiles');
 
     this.users$ = this.usersCol.snapshotChanges().pipe(
@@ -34,12 +35,15 @@ export class ProfileService {
     return this.users$;
   }
 
-  getselectedUser(userId: string): Observable<Profile> {
+  getProfile(userId: string): Observable<Profile> {
     return this.db.doc(`profiles/${userId}`).valueChanges().pipe(take(1));
   }
 
-  getProfile(user: User) {
-    return this.db.doc(`profiles/${user.uid}`).valueChanges().pipe(take(1));
+  getAuthenticatedUserProfile(): Observable<Profile> {
+    return this.authService.getAuthState()
+      .pipe(map(user => user.uid),
+      mergeMap(authId => this.db.doc(`profiles/${authId}`)
+      .valueChanges().pipe(take(1))));
   }
 
   async saveProfile(user: User, profile: Profile) {

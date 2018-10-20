@@ -24,7 +24,7 @@ export class MessagePage implements OnInit {
   ngOnInit() {
     const userId = this.route.snapshot.paramMap.get('id');
 
-    this.profileService.getselectedUser(userId).subscribe(profile => {
+    this.profileService.getProfile(userId).subscribe(profile => {
       this.selectedUserProfile = profile;
     });
 

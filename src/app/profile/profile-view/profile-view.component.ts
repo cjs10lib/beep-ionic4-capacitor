@@ -28,17 +28,10 @@ export class ProfileViewComponent implements OnInit, OnDestroy {
     const loader = await this.loading.create({ message: 'Loading profile...' });
     loader.present();
 
-    this.subscription = this.authService.getAuthState().subscribe(user => {
-
-      if (user) {
-        this.profileService.getProfile(user).subscribe(profile => {
-          this.profile = profile;
-
-          loader.dismiss();
-        });
-      }
+    this.profileService.getAuthenticatedUserProfile().subscribe(profile => {
+      this.profile = profile;
+      loader.dismiss();
     });
-
   }
 
   ngOnDestroy(): void {

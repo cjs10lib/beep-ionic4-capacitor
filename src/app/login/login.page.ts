@@ -25,7 +25,9 @@ export class LoginPage implements OnInit {
     if (!event.error) {
       (await this.toast.create({ message: `Welcome to beep ${event.result.user.email}`, duration: 3000 })).present();
 
-      this.profileService.getProfile(<User>event.result.user).subscribe(profile => {
+      const userId = event.result.user.uid;
+
+      this.profileService.getProfile(userId).subscribe(profile => {
         profile ? this.nav.navigateRoot('/tabs') : this.nav.navigateRoot('/edit-profile');
         // profile ? this.router.navigate(['tabs']) : this.router.navigate(['edit-profile']);
       });
