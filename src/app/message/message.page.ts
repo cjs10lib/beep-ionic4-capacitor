@@ -1,9 +1,11 @@
+import { Message } from './../models/messages/messages.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
 
 import { Profile } from './../models/profile/profile.model';
 import { ProfileService } from './../services/profile.service';
+import { MESSAGE_LIST } from '../mocks/messages/message.mock';
 
 @Component({
   selector: 'app-message',
@@ -13,6 +15,7 @@ import { ProfileService } from './../services/profile.service';
 export class MessagePage implements OnInit {
 
   selectedUserProfile = {} as Profile;
+  messageList: Message[] = [];
 
   constructor(private route: ActivatedRoute,
               private nav: NavController,
@@ -23,8 +26,9 @@ export class MessagePage implements OnInit {
 
     this.profileService.getselectedUser(userId).subscribe(profile => {
       this.selectedUserProfile = profile;
-      console.log(profile);
     });
+
+    this.messageList = MESSAGE_LIST;
   }
 
   navigateToTabsPage() {

@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { MessagePage } from './message.page';
 import { SendMesssageBoxComponent } from './send-messsage-box/send-messsage-box.component';
+import { ChatMessageComponent } from './chat-message/chat-message.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [MessagePage, SendMesssageBoxComponent]
+  declarations: [MessagePage, SendMesssageBoxComponent, ChatMessageComponent]
 })
 export class MessagePageModule {}

@@ -1,0 +1,15 @@
+<ion-item lines="none" *ngIf="chatIndex % 2 === 0; else alignRight">
+  <ion-label>
+    <h2>{{ message?.user?.firstName }} {{ message?.user?.lastName }}</h2>
+    <p>Hey, how are you?</p>
+  </ion-label>
+</ion-item>
+
+<ng-template #alignRight>
+  <ion-item lines="none">
+    <ion-label slot="end" class="align-right">
+      <h2>{{ message?.user?.firstName }} {{ message?.user?.lastName }}</h2>
+      <p>Hey, how are you?</p>
+    </ion-label>
+  </ion-item>
+</ng-template>
