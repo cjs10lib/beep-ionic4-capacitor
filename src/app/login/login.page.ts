@@ -1,11 +1,9 @@
-import { AuthService } from './../services/auth.service';
-
-import { ProfileService } from './../services/profile.service';
-import { LoginResponse } from './../models/login-response/login-response.model';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToastController, NavController } from '@ionic/angular';
-import { User } from 'firebase';
+import { NavController, ToastController } from '@ionic/angular';
+
+import { LoginResponse } from './../models/login-response/login-response.model';
+import { ProfileService } from './../services/profile.service';
 
 @Component({
   selector: 'app-login',
