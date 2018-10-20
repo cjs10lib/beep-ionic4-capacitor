@@ -1,5 +1,9 @@
+import { Component, Input, OnInit } from '@angular/core';
+import { User } from 'firebase';
+
 import { Message } from '../../../models/messages/messages.model';
-import { Component, OnInit, Input } from '@angular/core';
+import { Profile } from '../../../models/profile/profile.model';
+import { ProfileService } from '../../../services/profile.service';
 
 @Component({
   selector: 'app-chat-message',
@@ -8,10 +12,18 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ChatMessageComponent implements OnInit {
 
+  @Input() user: User;
   @Input() message: Message;
 
-  constructor() { }
 
-  ngOnInit() {}
+  senderProfile = {} as Profile;
+
+  constructor(private profileService: ProfileService) { }
+
+  ngOnInit() {
+    this.profileService.getProfile(this.message.user).subscribe(profile => {
+      this.senderProfile = profile;
+    });
+  }
 
 }

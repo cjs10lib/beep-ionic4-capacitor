@@ -1,15 +1,19 @@
-<ion-item lines="none">
+<ion-item lines="none" *ngIf="user?.uid !== message.user; else alignRight">
+  <ion-avatar slot="start">
+    <img src="assets/avatar/avatar.png" alt="Avatar">
+  </ion-avatar>
   <ion-label>
-    <!-- <h2>{{ message?.user?.firstName }} {{ message?.user?.lastName }}</h2> -->
+    <h3>{{ senderProfile?.firstName }} {{ senderProfile?.lastName }}</h3>
     <p>{{ message.message }}</p>
+    <p>{{ message?.created?.toDate() | date: 'dd/MM h:mm a' }}</p>
   </ion-label>
 </ion-item>
 
 <ng-template #alignRight>
   <ion-item lines="none">
-    <ion-label slot="end" class="align-right">
-      <!-- <h2>{{ message?.user?.firstName }} {{ message?.user?.lastName }}</h2> -->
+    <ion-label class="align-right">
       <p>{{ message.message }}</p>
+      <p>{{ message?.created?.toDate() | date: 'dd/MM h:mm a' }}</p>
     </ion-label>
   </ion-item>
 </ng-template>

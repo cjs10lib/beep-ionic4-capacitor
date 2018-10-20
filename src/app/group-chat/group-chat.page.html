@@ -4,12 +4,12 @@
       <ion-back-button (click)="navigateToGroupsPage()"></ion-back-button>
       <!-- <ion-back-button defaultHref="/tabs/(groups:groups)" routerDirection="root"></ion-back-button> -->
     </ion-buttons>
-    <ion-title>{{ group.name }}</ion-title>
+    <ion-title>{{ groupProfile.name }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  <app-chat-message [message]="message" *ngFor="let message of messages$ | async"></app-chat-message>
+  <app-chat-message [message]="message" [user]="user" *ngFor="let message of messages$ | async"></app-chat-message>
 </ion-content>
 
 <ion-footer>
