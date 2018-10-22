@@ -15,7 +15,7 @@ export class InboxPage implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
-    console.log(this.messages);
+    // console.log(this.messages);
   }
 
   navigatetoSearchUserPage() {

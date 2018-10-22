@@ -38,7 +38,11 @@ export class EditProfileFormComponent implements OnInit, OnDestroy {
 
       const userId = this.authenticatedUser.uid;
 
-      this.profileService.getProfile(userId).subscribe(profile => this.profile = profile);
+      this.profileService.getProfile(userId).subscribe(profile => {
+        if (profile) {
+          this.profile = profile;
+        }
+      });
       loader.dismiss();
     });
   }

@@ -1,7 +1,10 @@
+import { AngularFirestore } from '@angular/fire/firestore';
 import { LoginResponse } from './../models/login-response/login-response.model';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Account } from '../models/account/account.model';
+
+import * as firebase from 'firebase';
 
 @Injectable({
   providedIn: 'root'

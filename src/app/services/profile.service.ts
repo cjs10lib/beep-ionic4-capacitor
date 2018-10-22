@@ -3,10 +3,11 @@ import { Profile } from './../models/profile/profile.model';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import * as firebase from 'firebase';
-import { User } from 'firebase';
+import { User, database } from 'firebase';
 
 import { take, map, mergeMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { UserStatus } from '../models/user-status/user-status.model';
 
 @Injectable({
   providedIn: 'root'
@@ -59,4 +60,54 @@ export class ProfileService {
       return false;
     }
   }
+
+  getOnlineUsers(): Observable<UserStatus[]> {
+    return this.db.collection('status', ref => ref.where('state', '==', 'online')).valueChanges();
+  }
+
+  setOnlineStatus() {
+    const uid = firebase.auth().currentUser.uid;
+    const userStatusDatabaseRef = firebase.database().ref('/status/' + uid);
+    const userStatusFirestoreRef = this.db.doc(`status/${uid}`);
+
+    const isOfflineForDatabase = {
+      uid: uid,
+      state: 'offline',
+      last_changed: firebase.database.ServerValue.TIMESTAMP,
+    };
+
+    const isOnlineForDatabase = {
+      uid: uid,
+      state: 'online',
+      last_changed: firebase.database.ServerValue.TIMESTAMP,
+    };
+
+    const isOfflineForFirestore = {
+      uid: uid,
+      state: 'offline',
+      last_changed: firebase.firestore.FieldValue.serverTimestamp(),
+    };
+
+    const isOnlineForFirestore = {
+      uid: uid,
+      state: 'online',
+      last_changed: firebase.firestore.FieldValue.serverTimestamp(),
+    };
+
+    firebase.database().ref('.info/connected').on('value', async function(snapshot) {
+      if (snapshot.val() === false) {
+        userStatusFirestoreRef.set(isOfflineForFirestore);
+        return;
+      }
+
+      userStatusDatabaseRef.onDisconnect().set(isOfflineForDatabase).then(function() {
+        userStatusDatabaseRef.set(isOnlineForDatabase);
+
+        // We'll also add Firestore set here for when we come online.
+        userStatusFirestoreRef.set(isOnlineForFirestore);
+      });
+    });
+  }
 }
+
+

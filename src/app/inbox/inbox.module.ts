@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { InboxPage } from './inbox.page';
+import { OnlineUsersComponent } from './online-users/online-users.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [InboxPage]
+  declarations: [InboxPage, OnlineUsersComponent]
 })
 export class InboxPageModule {}
