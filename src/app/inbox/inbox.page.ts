@@ -1,4 +1,4 @@
-import { Message } from './../models/messages/messages.model';
+import { GroupMessage } from './../models/messages/messages.model';
 import { Component, OnInit } from '@angular/core';
 import { MESSAGE_LIST } from '../mocks/messages/message.mock';
 import { Router } from '@angular/router';
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class InboxPage implements OnInit {
 
-  messages: Message[] = MESSAGE_LIST;
+  messages: GroupMessage[] = MESSAGE_LIST;
 
   constructor(private router: Router) { }
 

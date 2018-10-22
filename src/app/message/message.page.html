@@ -8,11 +8,11 @@
 </ion-header>
 
 <ion-content padding>
-  <app-chat-message [message]="message" *ngFor="let message of messageList"></app-chat-message>
+  <!-- <app-chat-message [message]="message" *ngFor="let message of messageList"></app-chat-message> -->
 </ion-content>
 
 <ion-footer>
   <ion-toolbar>
-    <app-send-messsage-box></app-send-messsage-box>
+    <app-send-messsage-box (sendMessage)="sendMessage($event)"></app-send-messsage-box>
   </ion-toolbar>
 </ion-footer>

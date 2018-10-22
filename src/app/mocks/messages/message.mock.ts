@@ -1,7 +1,7 @@
-import { Message } from '../../models/messages/messages.model';
+import { GroupMessage } from '../../models/messages/messages.model';
 import { USER_LIST } from '../users/user.mock';
 
-const messageList: Message[] = [];
+const messageList: GroupMessage[] = [];
 
 USER_LIST.forEach(user => {
     messageList.push({ user: user.firstName, lastMessage: 'How are you?', created: new Date() });

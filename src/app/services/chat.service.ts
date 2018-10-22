@@ -1,4 +1,4 @@
-import { Message } from './../models/messages/messages.model';
+import { GroupMessage, PrivateMessage } from './../models/messages/messages.model';
 import { AuthService } from './auth.service';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Injectable } from '@angular/core';
@@ -55,7 +55,7 @@ export class ChatService {
   }
 
   async sendGroupChat(sentMessage: string, user: User, group: string) {
-    const message: Message = {
+    const message: GroupMessage = {
       message: sentMessage,
       user: user.uid,
       group: group,
@@ -68,6 +68,18 @@ export class ChatService {
 
   getGroupChat(groupId: string) {
     return this.db.collection('group-chat', ref => ref.where('group', '==', groupId).orderBy('created')).valueChanges();
+  }
+
+  async sendPrivateChat(sentMessage: string, sender: string, reciever: string) {
+    const message: PrivateMessage = {
+      message: sentMessage,
+      from: sender,
+      to: reciever,
+      created: firebase.firestore.FieldValue.serverTimestamp(),
+      lastUpdate: firebase.firestore.FieldValue.serverTimestamp()
+    };
+
+    return await this.db.collection('private-chat').add(message);
   }
 }
 

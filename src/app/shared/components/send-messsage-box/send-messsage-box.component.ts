@@ -1,6 +1,6 @@
 
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Message } from '../../../models/messages/messages.model';
+import { GroupMessage } from '../../../models/messages/messages.model';
 
 @Component({
   selector: 'app-send-messsage-box',

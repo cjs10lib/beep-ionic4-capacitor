@@ -2,7 +2,7 @@
   <ion-item-divider>
     <ion-label>Online Users</ion-label>
   </ion-item-divider>
-  <ion-item *ngFor="let user of onlineUsersProfile">
+  <ion-item *ngFor="let user of onlineUsersProfile" detail (click)="openChat(user)">
     <ion-avatar slot="start">
       <img src="assets/avatar/avatar.png" alt="Avatar">
     </ion-avatar>

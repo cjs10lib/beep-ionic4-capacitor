@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { ChatService } from '../services/chat.service';
 import { Observable, Subscription } from 'rxjs';
-import { Message } from '../models/messages/messages.model';
+import { GroupMessage } from '../models/messages/messages.model';
 import { Profile } from '../models/profile/profile.model';
 
 @Component({
@@ -17,7 +17,7 @@ import { Profile } from '../models/profile/profile.model';
 export class GroupChatPage implements OnInit {
 
   user: User;
-  messages$: Observable<Message[]>;
+  messages$: Observable<GroupMessage[]>;
 
 
   groupId: string;

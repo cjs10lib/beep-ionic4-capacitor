@@ -1,4 +1,5 @@
-import { Message } from './../models/messages/messages.model';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { GroupMessage } from './../models/messages/messages.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
@@ -6,6 +7,7 @@ import { NavController } from '@ionic/angular';
 import { Profile } from './../models/profile/profile.model';
 import { ProfileService } from './../services/profile.service';
 import { MESSAGE_LIST } from '../mocks/messages/message.mock';
+import { ChatService } from '../services/chat.service';
 
 @Component({
   selector: 'app-message',
@@ -14,21 +16,28 @@ import { MESSAGE_LIST } from '../mocks/messages/message.mock';
 })
 export class MessagePage implements OnInit {
 
+  authUserId: string;
+  selectedUserProfileId: string;
   selectedUserProfile = {} as Profile;
-  messageList: Message[] = [];
+  messageList: GroupMessage[] = [];
 
   constructor(private route: ActivatedRoute,
               private nav: NavController,
-              private profileService: ProfileService) { }
+              private profileService: ProfileService,
+              private chatService: ChatService,
+              private auth: AngularFireAuth) { }
 
   ngOnInit() {
-    const userId = this.route.snapshot.paramMap.get('id');
+    this.authUserId = this.auth.auth.currentUser.uid;
+    this.selectedUserProfileId = this.route.snapshot.paramMap.get('id');
 
-    this.profileService.getProfile(userId).subscribe(profile => {
+    this.profileService.getProfile(this.selectedUserProfileId).subscribe(profile => {
       this.selectedUserProfile = profile;
     });
+  }
 
-    this.messageList = MESSAGE_LIST;
+  async sendMessage(event: string) {
+    await this.chatService.sendPrivateChat(event, this.selectedUserProfileId, this.authUserId);
   }
 
   navigateToTabsPage() {

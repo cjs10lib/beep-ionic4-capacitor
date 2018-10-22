@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { ProfileService } from './../../services/profile.service';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -21,7 +22,7 @@ export class OnlineUsersComponent implements OnInit, OnDestroy {
 
   subscription: Subscription;
 
-  constructor(private profileService: ProfileService, private auth: AngularFireAuth) { }
+  constructor(private profileService: ProfileService, private auth: AngularFireAuth, private router: Router) { }
 
   ngOnInit() {
     this.profileService.setOnlineStatus();
@@ -53,6 +54,10 @@ export class OnlineUsersComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.destroy$.next(true);
     this.destroy$.unsubscribe();
+  }
+
+  openChat(user: Profile) {
+    this.router.navigate(['message', user.uid]);
   }
 
 }

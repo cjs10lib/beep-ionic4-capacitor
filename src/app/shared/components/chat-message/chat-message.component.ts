@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { User } from 'firebase';
 
-import { Message } from '../../../models/messages/messages.model';
+import { GroupMessage } from '../../../models/messages/messages.model';
 import { Profile } from '../../../models/profile/profile.model';
 import { ProfileService } from '../../../services/profile.service';
 
@@ -12,7 +12,7 @@ import { ProfileService } from '../../../services/profile.service';
 })
 export class ChatMessageComponent implements OnInit {
 
-  @Input() message: Message;
+  @Input() message: GroupMessage;
 
 
   senderProfile = {} as Profile;
