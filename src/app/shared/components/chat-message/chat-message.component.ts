@@ -12,7 +12,6 @@ import { ProfileService } from '../../../services/profile.service';
 })
 export class ChatMessageComponent implements OnInit {
 
-  @Input() user: User;
   @Input() message: Message;
 
 

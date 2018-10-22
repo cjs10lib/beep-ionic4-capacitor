@@ -2,8 +2,8 @@ import { ProfileService } from './../../services/profile.service';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { Subscription } from 'rxjs';
-import { concatMap } from 'rxjs/operators';
+import { Subscription, Subject } from 'rxjs';
+import { concatMap, takeUntil } from 'rxjs/operators';
 import { UserStatus } from '../../models/user-status/user-status.model';
 import { Profile } from '../../models/profile/profile.model';
 
@@ -13,6 +13,8 @@ import { Profile } from '../../models/profile/profile.model';
   styleUrls: ['./online-users.component.scss']
 })
 export class OnlineUsersComponent implements OnInit, OnDestroy {
+
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
   onlineUsers: UserStatus[] = [];
   onlineUsersProfile: Profile[] = [];
@@ -27,29 +29,30 @@ export class OnlineUsersComponent implements OnInit, OnDestroy {
     const currentUserId = this.auth.auth.currentUser.uid;
 
     if (currentUserId) {
-      this.subscription = this.profileService.getOnlineUsers().subscribe(status => {
+      this.subscription = this.profileService.getOnlineUsers()
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(status => {
 
-        const profile: Profile[] = [];
-        status.forEach(user => {
+          const profile: Profile[] = [];
+          status.forEach(user => {
 
-          // verify if user is current user
-          if (user.uid !== currentUserId) {
-            this.profileService.getProfile(user.uid).subscribe(userProfile => {
-              profile.push({ uid: user.uid, ...userProfile });
-            });
-          }
+            // verify if user is current user
+            if (user.uid !== currentUserId) {
+              this.profileService.getProfile(user.uid).subscribe(userProfile => {
+                profile.push({ uid: user.uid, ...userProfile });
+              });
+            }
 
-        });
+          });
 
-        this.onlineUsersProfile = profile;
+          this.onlineUsersProfile = profile;
       });
     }
   }
 
   ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 
 }
