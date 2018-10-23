@@ -1,0 +1,15 @@
+<ion-item lines="none" *ngIf="authUserId !== message.from; else alignRight">
+  <ion-label text-wrap class="partner-chat">
+    <p>{{ message.message }}</p>
+    <p>{{ message?.created?.toDate() | date: 'dd/MM h:mm a' }}</p>
+  </ion-label>
+</ion-item>
+
+<ng-template #alignRight>
+  <ion-item lines="none">
+    <ion-label text-wrap class="align-right auth-user-chat">
+      <p>{{ message.message }}</p>
+      <p>{{ message?.created?.toDate() | date: 'dd/MM h:mm a' }}</p>
+    </ion-label>
+  </ion-item>
+</ng-template>

@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content padding>
-  <!-- <app-chat-message [message]="message" *ngFor="let message of messageList"></app-chat-message> -->
+  <app-private-chat-message [message]="message" [authUserId]="authUserId" *ngFor="let message of messages$ | async"></app-private-chat-message>
 </ion-content>
 
 <ion-footer>

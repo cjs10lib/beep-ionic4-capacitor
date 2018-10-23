@@ -5,6 +5,7 @@ import { SendMesssageBoxComponent } from '../shared/components/send-messsage-box
 import { ChatMessageComponent } from '../shared/components/chat-message/chat-message.component';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
+import { PrivateChatMessageComponent } from './private-chat-message/private-chat-message.component';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { IonicModule } from '@ionic/angular';
   ],
   declarations: [
     ChatMessageComponent,
-    SendMesssageBoxComponent
+    SendMesssageBoxComponent,
+    PrivateChatMessageComponent
   ],
   exports: [
     CommonModule,
@@ -22,7 +24,8 @@ import { IonicModule } from '@ionic/angular';
     IonicModule,
 
     ChatMessageComponent,
-    SendMesssageBoxComponent
+    SendMesssageBoxComponent,
+    PrivateChatMessageComponent
   ]
 })
 export class SharedModule { }

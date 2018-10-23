@@ -1,0 +1,28 @@
+
+.align-right {
+    h2, p {
+        text-align: right;
+    }
+}
+
+.justify-content {
+    text-align: justify;
+}
+
+.auth-user-chat {
+    padding: 10px;
+    background-color:#c6d9f8;
+    border: none;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    align-self: flex-end;
+}
+
+.partner-chat {
+    padding: 10px;
+    background-color: #f5f6f9;
+    border: none;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    align-self: flex-end;
+}

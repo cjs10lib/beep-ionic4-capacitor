@@ -70,16 +70,36 @@ export class ChatService {
     return this.db.collection('group-chat', ref => ref.where('group', '==', groupId).orderBy('created')).valueChanges();
   }
 
+  private createPrivateChatPairId(user1: string, user2: string) {
+    let pairId;
+
+    if (user1 < user2) {
+      pairId = `${user1}|${user2}`;
+    } else {
+      pairId = `${user2}|${user1}`;
+    }
+
+    return pairId;
+  }
+
   async sendPrivateChat(sentMessage: string, sender: string, reciever: string) {
+    const pairedId = this.createPrivateChatPairId(sender, reciever);
+
     const message: PrivateMessage = {
       message: sentMessage,
       from: sender,
       to: reciever,
+      pairedId: pairedId,
       created: firebase.firestore.FieldValue.serverTimestamp(),
       lastUpdate: firebase.firestore.FieldValue.serverTimestamp()
     };
 
     return await this.db.collection('private-chat').add(message);
+  }
+
+  getPrivateChat(sender: string, reciever: string): Observable<PrivateMessage[]> {
+    const pairedId = this.createPrivateChatPairId(sender, reciever);
+    return this.db.collection('private-chat', ref => ref.where('pairedId', '==', pairedId).orderBy('created')).valueChanges();
   }
 }
 

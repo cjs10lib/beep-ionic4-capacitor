@@ -13,7 +13,7 @@ import { ProfileService } from '../../../services/profile.service';
 export class ChatMessageComponent implements OnInit {
 
   @Input() message: GroupMessage;
-
+  @Input() user: User;
 
   senderProfile = {} as Profile;
 

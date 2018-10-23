@@ -15,6 +15,7 @@ export interface PrivateMessage {
     message?: string;
     from?: string;
     to?: string;
+    pairedId?: string;
     delivered?: boolean;
     read?: boolean;
     lastMessage?: string;
